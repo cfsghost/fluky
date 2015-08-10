@@ -1,0 +1,43 @@
+{
+  "name": "todomvc-fluky",
+  "version": "0.0.2",
+  "description": "Example Flux architecture.",
+  "main": "js/app.js",
+  "dependencies": {
+    "react": ">=0.13.0"
+  },
+  "devDependencies": {
+    "babel-runtime": "^5.8.20",
+    "babelify": ">=6.1.3",
+    "browserify": ">=6.2.0",
+    "envify": ">=3.0.0",
+    "jest-cli": ">=0.1.17",
+    "reactify": ">=0.15.2",
+    "uglify-js": ">=2.4.15",
+    "watchify": ">=2.1.1"
+  },
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d .",
+    "build": "NODE_ENV=production browserify . > js/bundle.min.js",
+    "test": "jest"
+  },
+  "author": "Fred Chien",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "stage": 0,
+          "optional": [
+            "runtime"
+          ]
+        }
+      ],
+      "reactify",
+      "envify"
+    ]
+  },
+  "jest": {
+    "rootDir": "./js"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "fluky",
+  "version": "0.1.0",
+  "description": "Framework for flux data flow pattern",
+  "main": "./lib/fluky.js",
+  "scripts": {
+    "compile": "babel --optional runtime -d lib/ src/",
+    "prepublish": "npm run compile",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "framework",
+    "flux"
+  ],
+  "author": "Fred Chien <cfsghost@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.21",
+    "babel-runtime": "^5.8.20",
+    "co": "^4.6.0",
+    "co-emitter": "^0.2.3"
+  }
+}
