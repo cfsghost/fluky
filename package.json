@@ -17,7 +17,6 @@
   "devDependencies": {
     "babel": "^5.8.21",
     "babel-runtime": "^5.8.20",
-    "co": "^4.6.0",
-    "co-emitter": "^0.2.3"
+    "co": "^4.6.0"
   }
 }
