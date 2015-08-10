@@ -1,5 +1,5 @@
 var React = require('react');
-var Fluky = require('Fluky');
+var Fluky = require('fluky');
 var Footer = require('./Footer.react');
 var Header = require('./Header.react');
 var MainSection = require('./MainSection.react');

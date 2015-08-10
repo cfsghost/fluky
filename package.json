@@ -1,9 +1,10 @@
 {
   "name": "fluky",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Framework for flux data flow pattern",
   "main": "./lib/fluky.js",
   "scripts": {
+    "watch": "babel --optional runtime -w -d lib/ src/",
     "compile": "babel --optional runtime -d lib/ src/",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"

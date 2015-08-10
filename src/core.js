@@ -1,6 +1,5 @@
 import co from 'co';
 import Dispatcher from './dispatcher';
-import EventEmitter from './emitter';
 import FEvent from './fevent';
 
 function next() {
