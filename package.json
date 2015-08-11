@@ -15,11 +15,9 @@
   ],
   "author": "Fred Chien <cfsghost@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "babel": "^5.8.21",
-    "babel-runtime": "^5.8.20"
-  },
   "dependencies": {
+    "babel": "^5.8.21",
+    "babel-runtime": "^5.8.20",
     "co": "^4.6.0"
   }
 }
