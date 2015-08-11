@@ -1,6 +1,6 @@
-# fluky
+# Fluky
 
-A framework with flux data flow pattern and ECMAScript 6+. The dispatcher is implemented by ES6 generator to handle all of events.
+A framework with flux data flow pattern and ECMAScript 6+. With Fluky, everything is asynchronous event, there is simple way to control all of frontend data flow. Inspired by Koa, Fluky dispatcher and event handlers were implemented by ES6 generator.
 
 [![NPM](https://nodei.co/npm/fluky.png)](https://nodei.co/npm/fluky/)
 
@@ -11,13 +11,13 @@ Install fluky via NPM:
 npm install fluky
 ```
 
-Note that fluky is using `require` and `EventEmitter` of Node.js, you must have browserify to make it work for front-end purpose.
+Note that fluky is using `require` and `EventEmitter` of Node.js, you must have browserify or webpack to make it work for front-end purpose.
 
 ## Usage
 
 In the past, lack of framework cause Flux has high learning curve. That means if we want to use it, we must know exactly parts: the ___dispatcher___, the ___actions___, the ___stores___, and the ___views___. With `flux` NPM Module provided by Facebook, rough implementation is not easy to use and understand for newbies.
 
-But now, writing a Flux application is quite easy with fluxer.js framework, just like MVC architecture if task is not complicated. It is possible to make developer be able to focus on ___stores___ and ___views___, and no need to take care and take time on ___dispatcher___ and ___actions___ anymore.
+But now, writing a Flux application is quite easy with fluky framework, just like MVC architecture if task is not complicated. It is possible to make developer be able to focus on ___stores___ and ___views___, and no need to take care and take time on ___dispatcher___ and ___actions___ anymore.
 
 ## Demo
 
