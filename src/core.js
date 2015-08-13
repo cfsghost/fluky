@@ -16,6 +16,7 @@ class Core extends Dispatcher {
 		this.middlewares = [];
 		this.handlers = [];
 		this.wrapperMap = [];
+		this._state = {};
 
 		// Action
 		this.use(function *(event, next) {
@@ -140,6 +141,20 @@ class Core extends Dispatcher {
 		this.wrapperMap.push(wrapper);
 
 		return wrapper.generator;
+	}
+
+	setInitialState(state) {
+
+		// Reset state and apply new state
+		this._state = Object.assign({}, state);
+	}
+
+	get state() {
+		return this._state;
+	}
+
+	set state(val) {
+		this._state = Object.assign(this._state, val);
 	}
 }
 

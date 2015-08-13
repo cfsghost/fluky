@@ -1,14 +1,15 @@
 
 module.exports = function *() {
 
-	var store = {
+	// Get todo store from central state
+	var todoStore = this.state.todo = {
 		todos: []
 	};
 
 	function findTodoItem(id) {
 
-		for (var index in store.todos) {
-			var todo = store.todos[index];
+		for (var index in todoStore.todos) {
+			var todo = todoStore.todos[index];
 			if (todo.id == id) {
 				return index;
 			}
@@ -18,11 +19,11 @@ module.exports = function *() {
 	}
 
 	this.on('store.Todo.getTodos', function *(callback) {
-		callback(null, store.todos);
+		callback(null, todoStore.todos);
 	});
 
 	this.on('store.Todo.create', function *(text) {
-		store.todos.push({
+		todoStore.todos.push({
 			id: Date.now(),
 			complete: false,
 			text: text
@@ -37,7 +38,7 @@ module.exports = function *() {
 		if (index == -1)
 			return;
 
-		store.todos.splice(index, 1);
+		todoStore.todos.splice(index, 1);
 
 		this.dispatch('store.Todo', 'change');
 	});
@@ -51,7 +52,7 @@ module.exports = function *() {
 		if (index == -1)
 			return;
 
-		store.todos[index].text = text;
+		todoStore.todos[index].text = text;
 
 		this.dispatch('store.Todo', 'change');
 	});
@@ -62,7 +63,7 @@ module.exports = function *() {
 		if (index == -1)
 			return;
 
-		store.todos[index].complete = true;
+		todoStore.todos[index].complete = true;
 
 		this.dispatch('store.Todo', 'change');
 	});
@@ -73,7 +74,7 @@ module.exports = function *() {
 		if (index == -1)
 			return;
 
-		store.todos[index].complete = false;
+		todoStore.todos[index].complete = false;
 
 		this.dispatch('store.Todo', 'change');
 	});
@@ -81,13 +82,13 @@ module.exports = function *() {
 	this.on('store.Todo.destroyCompleted', function *() {
 
 		var todos = [];
-		for (var index in store.todos) {
-			if (!store.todos[index].complete) {
-				todos.push(store.todos[index]);
+		for (var index in todoStore.todos) {
+			if (!todoStore.todos[index].complete) {
+				todos.push(todoStore.todos[index]);
 			}
 		}
 
-		store.todos = todos;
+		todoStore.todos = todos;
 
 		this.dispatch('store.Todo', 'change');
 	});
@@ -95,15 +96,15 @@ module.exports = function *() {
 	this.on('store.Todo.markAll', function *() {
 
 		var areAllMarked = true;
-		for (var index in store.todos) {
-			if (!store.todos[index].complete) {
+		for (var index in todoStore.todos) {
+			if (!todoStore.todos[index].complete) {
 				areAllMarked = false;
 				break;
 			}
 		}
 
-		for (var index in store.todos) {
-			store.todos[index].complete = !areAllMarked;
+		for (var index in todoStore.todos) {
+			todoStore.todos[index].complete = !areAllMarked;
 		}
 
 		this.dispatch('store.Todo', 'change');
