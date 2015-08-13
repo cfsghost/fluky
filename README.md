@@ -25,7 +25,6 @@ Here is sample code below to show how to implement __actions__ and __stores__ wi
 ```js
 import Fluky from 'fluky';
   
-
 // ACTION
 Fluky.on('action.Todo.toggle', function *(todo) {
   if (todo.completed)
@@ -182,6 +181,30 @@ var stores = [
 ];
 
 Fluky.load(actions, stores);
+```
+
+### State Management
+
+In order to make an isomorphic app, initial state should be rendered on the server stage. That's a big challenge because state provided by server usually conflicts with client-side store. Fluky supports state management that a way to solve multiple stores problem.
+
+On the server-side, developer can use `setInitialState()` to create a initial state:
+```js
+setInitialState({
+	Todo: {}
+});
+```
+
+Then you can get state everywhere, modify it and add put stores in it. For example below:
+```js
+Fluky.state.Todo.timestamp = Date.now();
+```
+
+In module, it is possible to get `Fluky` with `this` keyword, then there is the same way to access state:
+```js
+var todoStore = function *() {
+	this.state.Todo.timestamp = Date.now();
+};
+
 ```
 
 ## Demo
