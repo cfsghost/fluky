@@ -107,7 +107,6 @@ class Core extends Dispatcher {
 	}
 
 	off(eventName, listener) {
-
 		// Find listener and remove its generator
 		for (var index in this.wrapperMap) {
 			var wrapper = this.wrapperMap[index];

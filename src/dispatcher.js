@@ -25,12 +25,11 @@ class Dispatcher {
 
 		// Whether handler exists or not
 		const index = e.indexOf(handler);
-		if (index > -1)
+		if (index == -1)
 			return;
 
 		// Remove
 		e.splice(index, 1);
-		this.listeners[eventName] = e;
 	}
 
 	hasListeners(eventName) {
