@@ -148,6 +148,14 @@ class Core extends Dispatcher {
 		this._state = Object.assign({}, state);
 	}
 
+	getState(stateName, defState) {
+
+		if (!this._state[stateName])
+			this._state[stateName] = defState || {};
+
+		return this._state[stateName];
+	}
+
 	get state() {
 		return this._state;
 	}
