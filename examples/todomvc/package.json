@@ -4,7 +4,7 @@
   "description": "Example Flux architecture.",
   "main": "js/app.js",
   "dependencies": {
-    "fluky": "^0.1.2",
+    "fluky": "^0.1.10",
     "react": ">=0.13.0"
   },
   "devDependencies": {

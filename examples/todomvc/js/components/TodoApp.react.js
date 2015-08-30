@@ -10,17 +10,12 @@ class TodoApp extends React.Component {
 		super(props, context);
 
 		this.state = {
-			todos: []
+			todos: Fluky.getState('Todo').todos
 		};
 	}
 
 	componentDidMount() {
 		Fluky.on('store.Todo', Fluky.bindListener(this.onTodoChanged));
-		Fluky.dispatch('store.Todo.getTodos', function(err, value) {
-			this.setState({
-				todos: value
-			});
-		}.bind(this))
 	}
 
 	componentWillUnmount() {
@@ -38,11 +33,10 @@ class TodoApp extends React.Component {
 	}
 
 	onTodoChanged = () => {
-		Fluky.dispatch('store.Todo.getTodos', function(err, value) {
-			this.setState({
-				todos: value
-			});
-		}.bind(this))
+
+		this.setState({
+			todos: Fluky.getState('Todo').todos
+		});
 	}
 };
 

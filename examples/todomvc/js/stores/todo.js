@@ -1,10 +1,10 @@
 
 module.exports = function *() {
 
-	// Get todo store from central state
-	var todoStore = this.state.todo = {
+	// Getting current state. Initialize state if state doesn't exist.
+	var todoStore = this.getState('Todo', {
 		todos: []
-	};
+	});
 
 	function findTodoItem(id) {
 
@@ -17,10 +17,6 @@ module.exports = function *() {
 
 		return -1;
 	}
-
-	this.on('store.Todo.getTodos', function *(callback) {
-		callback(null, todoStore.todos);
-	});
 
 	this.on('store.Todo.create', function *(text) {
 		todoStore.todos.push({
