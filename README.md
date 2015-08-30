@@ -34,9 +34,11 @@ Fluky.on('action.Todo.toggle', function *(todo) {
 });
 
 // STORE
-var todoStore = {
+
+// Getting current state. Initialize state if state doesn't exist.
+var todoStore = Fluky.getState('Todo', {
   todos: [];
-};
+});
 
 Fluky.on('store.Todo.unmark', function *(id) {
 
@@ -85,9 +87,6 @@ Fluky.on('store.Todo.create', function *(text) {
   Fluky.dispatch('store.Todo', 'change');
 });
 
-Fluky.on('store.Todo.getTodos', function *(callback) {
-  callback(todoStore.todos);
-});
 ```
 
 If no action defined, message will be forwarded to store. For instance, `action.Todo.create` isn't defined but forwarding to `store.Todo.create` automatically.
@@ -105,7 +104,9 @@ class TodoList extends React.Component {
 
   constructor() {
     // preparing state to initialize component
-    this.state.todos: []
+    this.state = {
+		todos: Fluky.getState('Todo').todos;
+	};
   }
   
   componentDidMount() {
@@ -119,14 +120,10 @@ class TodoList extends React.Component {
   // Using "() =>" to bind "this" to method
   onChange = () => {
 
-    // Fire event to get todo list
-    Fluky.dispatch('store.Todo.getTodos', (todos) => {
-  
-      // Updating state
-      this.setState({
-        todos: todos;
-      });
-    }.bind(this));
+    // Updating state
+    this.setState({
+      todos: Fluky.getState('Todo').todos;
+    });
   }
 
   create = () => {
@@ -161,8 +158,8 @@ You can create a Store without ever touching Action. Fluky provide a way to exte
 import Fluky from 'fluky';
 
 var todoStore = function *() {
-  this.on('store.Todo.getTodos', function *() { ... });
-  this.on('store.Todo', function *(callback) { ... });
+  this.on('store.Todo.completeTodoItem', function *() { ... });
+  this.on('store.Todo', function *() { ... });
 };
 
 Fluky.load(todoStore);
@@ -189,20 +186,20 @@ In order to make an isomorphic app, initial state should be rendered on the serv
 
 On the server-side, developer can use `setInitialState()` to create a initial state:
 ```js
-setInitialState({
+Fluky.setInitialState({
 	Todo: {}
 });
 ```
 
-Then you can get state everywhere, modify it and add put stores in it. For example below:
+Then you can get state with `getState()` everywhere, modify it and add put stores in it. For example below:
 ```js
-Fluky.state.Todo.timestamp = Date.now();
+Fluky.getState('Todo').timestamp = Date.now();
 ```
 
 In module, it is possible to get `Fluky` with `this` keyword, then there is the same way to access state:
 ```js
 var todoStore = function *() {
-	this.state.Todo.timestamp = Date.now();
+	this.getState('Todo').timestamp = Date.now();
 };
 
 ```
