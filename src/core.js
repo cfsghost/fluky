@@ -13,6 +13,7 @@ class Core extends Dispatcher {
 	constructor() {
 		super();
 
+		this.disabledEventHandler = false;
 		this.middlewares = [];
 		this.handlers = [];
 		this.wrapperMap = [];
@@ -81,6 +82,11 @@ class Core extends Dispatcher {
 	}
 
 	dispatch(eventStr) {
+
+		// For isomorphic app, sometimes no need to handle event on server-side
+		if (this.disabledEventHandler)
+			return;
+
 		const event = new FEvent(eventStr, arguments);
 
 		this.internalDispatch(event);
@@ -162,6 +168,10 @@ class Core extends Dispatcher {
 
 	set state(val) {
 		this._state = Object.assign(this._state, val);
+	}
+
+	createInstance() {
+		return new Core();
 	}
 }
 

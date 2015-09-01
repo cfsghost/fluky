@@ -4,6 +4,8 @@ class Dispatcher {
 
 	constructor() {
 		this.listeners = {};
+		this.once_listeners = {};
+		this._refs = 0;
 	}
 
 	on(eventName, handler) {
@@ -41,9 +43,15 @@ class Dispatcher {
 	}
 
 	emit(eventName) {
+		var idleEvent = (eventName == 'idle');
 		var e = this.listeners[eventName] || [];
 		var args = Array.prototype.slice.call(arguments);
 		args.shift();
+
+		// Increase reference counter
+		if (!idleEvent) {
+			this._refs++;
+		}
 
 		return function(done) {
 
@@ -55,22 +63,33 @@ class Dispatcher {
 					var handler = co.wrap(e[index]);
 
 					// Run and wait
-					args = yield function(done) {
-						handler
-							.apply(this, args)
-							.then(function(ret) {
-								if (ret === undefined) {
-									done(null, args);
-								} else {
-									done(null, [ ret ]);
-								}
-							}, function(err) {
-								done(err);
-							});
-					}.bind(this);
+					try {
+						args = yield function(done) {
+							handler
+								.apply(this, args)
+								.then(function(ret) {
+									if (ret === undefined) {
+										done(null, args);
+									} else {
+										done(null, [ ret ]);
+									}
+								}, function(err) {
+									done(err);
+								});
+						}.bind(this);
+					} catch(e) {}
+				}
+
+				// Decrease reference counter
+				if (!idleEvent) {
+					this._refs--;
 				}
 
 				done();
+
+				// Everything is done, fire the idle event
+				if (!this._refs && !idleEvent)
+					yield this.emit('idle');
 			}.bind(this));
 		}.bind(this)
 	}
