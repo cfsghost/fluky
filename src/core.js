@@ -13,6 +13,8 @@ class Core extends Dispatcher {
 	constructor() {
 		super();
 
+		this.isBrowser = false;
+		this.options = {};
 		this.disabledEventHandler = false;
 		this.middlewares = [];
 		this.handlers = [];

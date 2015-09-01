@@ -9,6 +9,9 @@ if (typeof window != 'undefined') {
 			core.setInitialState(window.Fluky.state);
 		}
 	}
+
+	// set browser flag
+	core.isBrowser = true;
 }
 
 module.exports = core;
