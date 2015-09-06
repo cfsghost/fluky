@@ -4,7 +4,6 @@ class Dispatcher {
 
 	constructor() {
 		this.listeners = {};
-		this.once_listeners = {};
 		this._refs = 0;
 	}
 
@@ -77,7 +76,11 @@ class Dispatcher {
 									done(err);
 								});
 						}.bind(this);
-					} catch(e) {}
+
+					} catch(e) {
+						console.log(e.stack);
+					}
+
 				}
 
 				// Decrease reference counter
