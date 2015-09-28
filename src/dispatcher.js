@@ -80,8 +80,10 @@ class Dispatcher {
 					} catch(e) {
 						// Workaround: React 0.13 has a bug on server rendering that document object wasn't found.
 						// Just ignore it because it doesn't affect anything on server-side. 
-						if (e.message != 'document is not defined' || e.stack.indexOf('at getActiveElement') == -1)
-							console.log(e.stack);
+						if (e.message != 'document is not defined' || e.stack.indexOf('at getActiveElement') == -1) {
+							done(e);
+							return;
+						}
 					}
 
 				}
