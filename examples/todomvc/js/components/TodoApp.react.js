@@ -15,7 +15,7 @@ class TodoApp extends React.Component {
 	}
 
 	componentDidMount() {
-		Fluky.on('store.Todo', Fluky.bindListener(this.onTodoChanged));
+		Fluky.on('state.Todo', Fluky.bindListener(this.onTodoChanged));
 	}
 
 	componentWillUnmount() {

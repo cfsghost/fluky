@@ -25,7 +25,7 @@ module.exports = function *() {
 			text: text
 		});
 
-		this.dispatch('store.Todo', 'change');
+		this.dispatch('state.Todo');
 	});
 
 	this.on('store.Todo.destroy', function *(id) {
@@ -36,7 +36,7 @@ module.exports = function *() {
 
 		todoStore.todos.splice(index, 1);
 
-		this.dispatch('store.Todo', 'change');
+		this.dispatch('state.Todo');
 	});
 
 	this.on('store.Todo.updateText', function *(id, text) {
@@ -50,7 +50,7 @@ module.exports = function *() {
 
 		todoStore.todos[index].text = text;
 
-		this.dispatch('store.Todo', 'change');
+		this.dispatch('state.Todo');
 	});
 
 	this.on('store.Todo.mark', function *(id) {
@@ -61,7 +61,7 @@ module.exports = function *() {
 
 		todoStore.todos[index].complete = true;
 
-		this.dispatch('store.Todo', 'change');
+		this.dispatch('state.Todo');
 	});
 
 	this.on('store.Todo.unmark', function *(id) {
@@ -72,7 +72,7 @@ module.exports = function *() {
 
 		todoStore.todos[index].complete = false;
 
-		this.dispatch('store.Todo', 'change');
+		this.dispatch('state.Todo');
 	});
 
 	this.on('store.Todo.destroyCompleted', function *() {
@@ -86,7 +86,7 @@ module.exports = function *() {
 
 		todoStore.todos = todos;
 
-		this.dispatch('store.Todo', 'change');
+		this.dispatch('state.Todo');
 	});
 
 	this.on('store.Todo.markAll', function *() {
@@ -103,6 +103,6 @@ module.exports = function *() {
 			todoStore.todos[index].complete = !areAllMarked;
 		}
 
-		this.dispatch('store.Todo', 'change');
+		this.dispatch('state.Todo');
 	});
 };
