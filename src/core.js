@@ -16,6 +16,7 @@ class Core extends Dispatcher {
 		this.isBrowser = false;
 		this.options = {};
 		this.disabledEventHandler = false;
+		this.serverRendering = false;
 		this.middlewares = [];
 		this.handlers = [];
 		this.wrapperMap = [];
@@ -43,6 +44,13 @@ class Core extends Dispatcher {
 
 		// Dispatch events
 		this.use(function *(event, next) {
+
+			if (this.serverRendering) {
+				// Ignore state change event
+				if (event.type == 'state')
+					return;
+			}
+
 			yield this.emit.apply(this, event.args);
 		});
 	}
@@ -162,6 +170,14 @@ class Core extends Dispatcher {
 			this._state[stateName] = defState || {};
 
 		return this._state[stateName];
+	}
+
+	setState(stateName, state) {
+
+		if (!this._state[stateName])
+			this._state[stateName] = state;
+		else
+			this._state[stateName] = Object.assign(this._state[stateName], state);
 	}
 
 	get state() {
