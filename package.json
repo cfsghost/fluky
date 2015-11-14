@@ -1,6 +1,6 @@
 {
   "name": "fluky",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "Framework for flux data flow pattern",
   "main": "./lib/fluky.js",
   "scripts": {
