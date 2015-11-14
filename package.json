@@ -16,8 +16,8 @@
   "author": "Fred Chien <cfsghost@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "babel": ">=5.8.21",
-    "babel-runtime": ">=5.8.20",
+    "babel": "^5.8.21",
+    "babel-runtime": "^5.8.20",
     "co": "^4.6.0"
   }
 }
