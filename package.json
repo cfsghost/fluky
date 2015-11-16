@@ -1,11 +1,11 @@
 {
   "name": "fluky",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "Framework for flux data flow pattern",
   "main": "./lib/fluky.js",
   "scripts": {
-    "watch": "babel --optional runtime -w -d lib/ src/",
-    "compile": "mkdir -p lib; babel --optional runtime src/ --plugins uglify:after -o lib/fluky.js",
+    "watch": "webpack -w",
+    "compile": "webpack -p",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,12 +15,11 @@
   ],
   "author": "Fred Chien <cfsghost@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "babel": "^5.8.21",
-    "babel-runtime": "^5.8.20",
-    "co": "^4.6.0"
-  },
   "devDependencies": {
-    "babel-plugin-uglify": "^1.0.2"
+    "co": "^4.6.0",
+    "babel-core": "^5.8.29",
+    "babel-loader": "^5.3.3",
+    "babel-runtime": "^5.8.29",
+    "webpack": "^1.12.2"
   }
 }
