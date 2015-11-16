@@ -5,7 +5,7 @@
   "main": "./lib/fluky.js",
   "scripts": {
     "watch": "babel --optional runtime -w -d lib/ src/",
-    "compile": "babel --optional runtime -d lib/ src/",
+    "compile": "mkdir -p lib; babel --optional runtime src/ --plugins uglify:after -o lib/fluky.js",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +19,8 @@
     "babel": "^5.8.21",
     "babel-runtime": "^5.8.20",
     "co": "^4.6.0"
+  },
+  "devDependencies": {
+    "babel-plugin-uglify": "^1.0.2"
   }
 }
