@@ -10,6 +10,10 @@ function next() {
 
 class Core extends Dispatcher {
 
+	createInstance() {
+		return new Core();
+	}
+
 	constructor() {
 		super();
 
@@ -187,10 +191,6 @@ class Core extends Dispatcher {
 	set state(val) {
 		this._state = Object.assign(this._state, val);
 	}
-
-	createInstance() {
-		return new Core();
-	}
 }
 
-module.exports = Core;
+export default Core;

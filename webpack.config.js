@@ -5,10 +5,12 @@ var configs = module.exports = {
 		]
 	},
 	output: {
+		libraryTarget: 'commonjs2',
 		path: __dirname + '/lib',
 		publicPath: '/lib',
 		filename: 'fluky.js'
 	},
+	target: 'node',
 	module: {
 		loaders: [
 			{
