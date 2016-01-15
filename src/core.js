@@ -116,7 +116,7 @@ class Core extends Dispatcher {
 				try {
 					var isAlive = yield* handler(event, next);
 				} catch(e) {
-					console.log(e);
+					console.log(e.stack);
 					break;
 				}
 
