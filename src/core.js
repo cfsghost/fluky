@@ -17,7 +17,7 @@ class Core extends Dispatcher {
 	constructor() {
 		super();
 
-		this.isBrowser = false;
+		this.isBrowser = true;
 		this.options = {};
 		this.disabledEventHandler = false;
 		this.serverRendering = false;
@@ -25,6 +25,17 @@ class Core extends Dispatcher {
 		this.handlers = [];
 		this.wrapperMap = [];
 		this._state = {};
+
+		// Load default state on browser-side
+		if (typeof window == 'undefined') {
+			this.isBrowser = false;
+		} else {
+			if (window.Fluky) {
+				if (window.Fluky.state) {
+					this._state = Object.assign({}, window.Fluky.state);
+				}
+			}
+		}
 
 		// Action
 		this.use(function *(event, next) {
